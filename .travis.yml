@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - '8'
+branches:
+  only:
+    - master
+cache:
+  yarn: true
+script:
+  - git config --global user.name "kyungyoonha"
+  - git config --global user.email "gkb10a@gmail.com"
+  - echo "machine github.com login kyungyoonha password 51d8fc865b9a37ab02db40a56fb0216557e330c2 " > ~/.netrc
+  - cd website && npm install && GIT_USER="kyungyoonha" npm run publish-gh-pages

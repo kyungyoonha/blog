@@ -11,7 +11,7 @@
 // List of projects/orgs using your project for the users page.
 const users = [
     {
-        caption: "r_yoon",
+        caption: "kyungyoonha",
         // You will need to prepend the image path with your baseUrl
         // if it is not '/', like: '/test-site/img/image.jpg'.
         image: "/img/undraw_open_source.svg",
@@ -21,26 +21,17 @@ const users = [
 ];
 
 const siteConfig = {
-    title: "r_yoon", // Title for your website.
-    tagline: "A website for testing",
-    url: "https://r_yoon.github.io", // Your website URL
-    baseUrl: "/", // Base URL for your project */
-    // For github.io type URLs, you would set the url and baseUrl like:
-    //   url: 'https://facebook.github.io',
-    //   baseUrl: '/test-site/',
-
-    // Used for publishing and more
-    projectName: "r_yoon.github.io",
+    title: "TIL: TODAY I LEARN",
+    tagline: "개발 일지",
+    url: "https://kyungyoonha.github.io", // Your website URL
+    baseUrl: "/",
+    projectName: "kyungyoonha.github.io", // 레포지토리 이름
     organizationName: "kyungyoonha",
-    // For top-level user or org sites, the organization is still the same.
-    // e.g., for the https://JoelMarcey.github.io site, it would be set like...
-    //   organizationName: 'JoelMarcey'
 
-    // For no header links in the top nav bar -> headerLinks: [],
     headerLinks: [
-        { doc: "doc1", label: "Docs" },
-        { doc: "doc4", label: "API" },
-        { page: "help", label: "Help" },
+        { doc: "project/devpedia/devpedia_0", label: "Project" },
+        { doc: "javascript/javascript_1", label: "TIL" },
+        // { page: "help", label: "Help" },
         { blog: true, label: "Blog" },
     ],
 
@@ -54,7 +45,7 @@ const siteConfig = {
 
     /* Colors for website */
     colors: {
-        primaryColor: "#52768e",
+        primaryColor: "#209cee",
         secondaryColor: "#395263",
     },
 
@@ -73,7 +64,7 @@ const siteConfig = {
   */
 
     // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-    copyright: `Copyright © ${new Date().getFullYear()} Your Name or Your Company Name`,
+    copyright: `Copyright © 2020 KyungYoon Ha`,
 
     highlight: {
         // Highlight.js theme to use for syntax highlighting in code blocks.
