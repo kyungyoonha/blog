@@ -11,6 +11,7 @@
     collate: 'utf8md4_general_ci'
 }
 ```
+- db.sequelize.sync() => 노드랑 sequelize를 연결
 
 ### 1-1. 노드에서 시퀄라이즈 사용
 - modal 명은 
@@ -52,7 +53,7 @@ Post.associate =db => {
     db.Post.hasMany(db.Comment);
     db.Post.hasMany(db.Image)
     db.Post.belongsToMany(db.User, { through: 'Like', as 'Likers' }) // 다대 다 => 좋아요
-    db.Post.belongsTo(db.Post, { as: 'Retweet' }) // 리트윗
+    db.Post.belongsTo(db.Post, { as: 'Retweet' }) // 리트윗 하나의 원본 트윗은 여러개의 리트윗을 가질 수 있음
     
 }
 
@@ -96,6 +97,7 @@ Hashtag.associate db => {
     - belongsTo로 자동으로 생기는 id의 이름을 변경할 수 있다.
     - db.Post.belongsTo(db.Post, { as: 'Retweet' })
     - Post 모델 안에 PostId 컬럼이 생기면 이상하므로 RetweetId로 변경 
+    - ![](https://user-images.githubusercontent.com/29701385/106028257-10d91d00-610f-11eb-8f4e-238e9a6cc0d7.png)
 
 
 - 같은 테이블끼리 다대 다 가능(유저가 유저 팔로우)
@@ -105,3 +107,90 @@ Hashtag.associate db => {
 - 다대 다 관계에서 테이블 명이 다른 경우는 컬럼명이 UserId / PostId 처럼 구분이 됌
 - 같은 테이블에서 다대 다 관계인 경우는 중간테이블의 컬럼 명이 같을 수 없으므로 foreignKey를 이용하여
 변경해주어야한다.
+
+## bycrypt
+- 비밀번호 암호화할때사용
+- 옵션은 12 -> 너무 길면 오래걸림
+- 1초정도 걸리는 숫자로 정해주는 것이 좋다.
+- 비동기 이므로 async 써줘야한다.
+
+## 에러는 next로 한방에 처리
+```js
+router.post('/', async (req, res, next) => {
+    try{
+
+    }catch(err){
+        console.log(err)
+        next(err)
+    }
+})
+
+```
+
+## CORS
+- 브라우저에서 다른 도메인 서버로 요청했을 경우 발생
+- 프론트 서버에서 백엔드 서버로 보낼때는 cors가 안생긴다 -> 브라우저에서 서버로 요청시에만 발생
+- 해결. 서버에서 헤더에 Access-Control-Allow-Origin을 설정해준다.
+- 해결. 모든 요청에 대해서 허용해버리면 해커가 서버로 바로 데이터 전송할 수 있으므로 특정 도메인만 설정해준다.
+```js
+ // 방법1: 라우터에서 설정
+ res.setHeader('Access-Control-Allow-Origin', '*') // http://localhost:3000
+ res.status(200).send('ok')
+
+// 방법 2: cors()
+app.use(cors({
+    origin: 'http://nodebird.com',
+    credential: true // default 값은 false임 => 
+}))
+```
+
+- 프록시 방식
+    - 브라우저(3000)에서 같은 도메인의 프론트 서버(3000)로 요청 -> 프론트서버(3000)에서 다른도메인의 백엔드 서버(3060)로 요청
+    - 서버에서 서버로 전송하는건 문제 없음
+    - 응답할때도 백엔드 서버에서 프론트서버로 먼저보내고 브라우저로 보낸다  
+
+
+## passport
+- 로그인 관련된것을 한번에 처리
+
+
+### 미들웨어 확장
+```js
+// 적용전
+// next()를 쓸수가 없다.
+router.post('/login', passport.authenticate('local', (err, user, info) => {
+    if(err){
+        console.error(err);
+        next(err)
+    }
+})
+
+// 적용후 
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        if(err){
+            console.error(err);
+            next(err)
+        }
+    })(req, res, next);
+})
+```
+
+## passport + 쿠키와 세션
+- 쿠키 & 세션 원리
+    - 로그인을 하면 브라우저랑 서버가 같은 정보를 가지고 있어야하는데 브라우저는 누구나 접속가능하므로 해킹에 취약하다
+    - 유저정보를 브라우저에 보낼 수 없으므로 (비밀번호 등) 랜덤한 문자열을 쿠키에 담아서 보내준다.
+    - 서버는 랜덤한 문자열과 유저정보를 묶어서 세션으로 가지고 있는다.
+    - 브라우저가 api 요청할때 쿠키에 랜덤한 문자열을 가지고 있으면 서버 세션에서 랜덤 문자열로 원래 유저 정보로 복원하여 누군지 알 수 있음
+- passport
+    - passport 사용하면 쿠키에 랜덤한 문자열 자동으로 담아준다. (res.setHeader('Cookie', 'fewfwcewcw))
+    - 서버는 모든 유저정보를 다 가지고 있는 것이 아니라 랜덤한 문자열과 매칭되는 id 값만 가지고 있음
+    - 유저 정보는 시간이 지날수록 무거워지므로 데이터를 다 가지고 있으면 메모리가 심하게 낭비(댓글수, 결제정보 등등)
+    - req.login(user)
+        - serializeUser() => 유저 정보중에서 쿠키의 랜덤 문자열과 묶어줄 id값만 남겨준다.
+        - deserializeUser() => id값으로 유저정보 찾아서 복원한다.
+
+- 나중에는 세션 저장용 db로 redis를 사용한다.
+
+## Route.replace()
+- 뒤로가기 했을때 그 페이지의 기록을 지우고 싶은 경우 사용한다.
