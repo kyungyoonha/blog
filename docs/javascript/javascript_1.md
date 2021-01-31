@@ -1,7 +1,7 @@
 ---
 id: javascript_1
-title: 자바스크립트의 자료구조
-sidebar_label: 자료구조
+title: ※ 자바스크립트의 자료구조
+sidebar_label: ※ 자료구조
 ---
 
 ## 1 배열

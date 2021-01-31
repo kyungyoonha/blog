@@ -1,7 +1,7 @@
 ---
 id: css_2
-title: mvvm 패턴
-sidebar_label: mvvm 패턴
+title: ※ mvvm 패턴
+sidebar_label: ※ mvvm 패턴
 ---
 
 ## 1 MVVM 구조

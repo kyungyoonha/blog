@@ -1,7 +1,7 @@
 ---
 id: javascript_3
 title: ※ Async - Await란 무엇인가
-sidebar_label: Async Await
+sidebar_label: ※ Async Await
 ---
 
 -   ### 정의

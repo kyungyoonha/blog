@@ -1,7 +1,7 @@
 ---
 id: css_1
-title: npm vs yarn
-sidebar_label: npm vs yarn
+title: ※ npm vs yarn
+sidebar_label: ※ npm vs yarn
 ---
 
 ## 1 npm

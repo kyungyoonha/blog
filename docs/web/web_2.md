@@ -1,7 +1,7 @@
 ---
 id: web_2
 title: ※ REAL DOM (VS) VIRTUAL DOM
-sidebar_label: REAL DOM (VS) VIRTUAL DOM
+sidebar_label: ※ REAL DOM (VS) VIRTUAL DOM
 ---
 
 ## 1. DOM

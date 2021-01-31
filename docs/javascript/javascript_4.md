@@ -1,7 +1,7 @@
 ---
 id: javascript_4
 title: ※ 콜백함수 & 익명함수
-sidebar_label: 콜백함수 & 익명함수
+sidebar_label: ※ 콜백함수 & 익명함수
 ---
 
 ### 1. 익명함수

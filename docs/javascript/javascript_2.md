@@ -1,7 +1,7 @@
 ---
 id: javascript_2
 title: ※ 변수타입 (기본형 / 참조형)
-sidebar_label: 변수타입 (기본형 / 참조형)
+sidebar_label: ※ 변수타입 (기본형 / 참조형)
 ---
 
 ## 1 변수타입

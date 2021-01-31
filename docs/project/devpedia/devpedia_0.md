@@ -1,7 +1,7 @@
 ---
 id: devpedia_0
-title: watchapedia ZERO: 영화,책,TV 프로그램 추천 평가 서비스
-sidebar_label: 1. 소개
+title: ※ watchapedia ZERO: 영화,책,TV 프로그램 추천 평가 서비스
+sidebar_label: ※ 소개
 ---
 
 

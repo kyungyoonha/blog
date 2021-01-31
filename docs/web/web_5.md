@@ -1,7 +1,7 @@
 ---
 id: web_5
 title: ※ Asynchronous 비동기
-sidebar_label: Asynchronous
+sidebar_label: ※ Asynchronous
 ---
 
 ## 1 Async 비동기식

@@ -1,7 +1,7 @@
 ---
 id: web_4
 title: ※ HTTP 통신 vs Socket 통신
-sidebar_label: HTTP 통신 vs Socket 통신
+sidebar_label: ※ HTTP 통신 vs Socket 통신
 ---
 
 ## ※ 비동기 서버통신의 모듈 axios, fetch 비교

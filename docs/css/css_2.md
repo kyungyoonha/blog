@@ -1,7 +1,7 @@
 ---
 id: css_2
-title: 벤더 프리픽스란?
-sidebar_label: 벤더 프리픽스란?
+title: ※ 벤더 프리픽스란?
+sidebar_label: ※ 벤더 프리픽스란?
 ---
 
 ## 1 벤더 프리픽스란?

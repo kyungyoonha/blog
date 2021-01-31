@@ -1,7 +1,7 @@
 ---
 id: javascript_6
 title: ※ 유용
-sidebar_label: Object.entries(obj)
+sidebar_label: ※ Object.entries(obj)
 ---
 
 -   key / value 같이 사용할때 유용하다.

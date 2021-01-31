@@ -1,7 +1,7 @@
 ---
 id: web_1
 title: ※ Access Token / Refresh Token 이란?
-sidebar_label: Access Token / Refresh Token
+sidebar_label: ※ Access Token / Refresh Token
 ---
 
 ## 1. 액세스 토큰 Access Token

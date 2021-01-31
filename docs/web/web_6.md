@@ -1,7 +1,7 @@
 ---
 id: web_6
 title: ※ 웹팩이란 무엇인가?
-sidebar_label: 웹팩이란 무엇인가?
+sidebar_label: ※ 웹팩이란 무엇인가?
 ---
 
 ## 1 웹팩이란?

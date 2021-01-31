@@ -1,7 +1,7 @@
 ---
 id: web_11
 title: ※ ESLint
-sidebar_label: ESLint
+sidebar_label: ※ ESLint
 ---
 
 ## 1 ESLint

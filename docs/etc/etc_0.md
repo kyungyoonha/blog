@@ -1,7 +1,7 @@
 ---
 id: css_0
-title: 레지스트리란
-sidebar_label: 레지스트리란
+title: ※ 레지스트리란
+sidebar_label: ※ 레지스트리란
 ---
 
 ## 1 레지스트리란?

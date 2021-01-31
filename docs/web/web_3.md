@@ -1,7 +1,7 @@
 ---
 id: web_3
 title: ※ HTTP vs HTTPs & https 서버 인증서 암호화 과정
-sidebar_label: HTTP vs HTTPs & https 서버 인증서 암호화 과정
+sidebar_label: ※ HTTP vs HTTPs & https 서버 인증서 암호화 과정
 ---
 
 ## 1 HTTP

@@ -1,7 +1,7 @@
 ---
 id: javascript_5
 title: ※ AJAX란 무엇인가?
-sidebar_label: AJAX란
+sidebar_label: ※ AJAX란
 ---
 
 ### 1. 정의

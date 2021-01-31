@@ -1,7 +1,7 @@
 ---
 id: web_8
 title: ※ 크로스도메인 & CORS
-sidebar_label: 크로스도메인 & CORS
+sidebar_label: ※ 크로스도메인 & CORS
 ---
 
 ## 1. 크로스 도메인

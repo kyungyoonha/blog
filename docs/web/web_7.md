@@ -1,7 +1,7 @@
 ---
 id: web_7
 title: ※ 서버API 통신 & REST API란 무엇인가?
-sidebar_label: 서버API 통신 & REST API
+sidebar_label: ※ 서버API 통신 & REST API
 ---
 
 ## 1. 서버 API 통신

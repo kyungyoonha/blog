@@ -1,7 +1,7 @@
 ---
 id: web_9
 title: ※ 브라우저 캐시
-sidebar_label: 브라우저 캐시
+sidebar_label: ※ 브라우저 캐시
 ---
 
 ## 브라우저 캐시

@@ -1,7 +1,7 @@
 ---
 id: node_0
 title: ※ Node.js 교과서
-sidebar_label: Node.js 교과서
+sidebar_label: ※ Node.js 교과서
 ---
 
 ## 노드란

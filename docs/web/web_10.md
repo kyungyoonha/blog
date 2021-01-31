@@ -1,7 +1,7 @@
 ---
 id: web_10
 title: ※ 번들러
-sidebar_label: 번들러
+sidebar_label: ※ 번들러
 ---
 
 ## 1. 번들러

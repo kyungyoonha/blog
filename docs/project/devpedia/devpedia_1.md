@@ -1,7 +1,7 @@
 ---
 id: devpedia_1
-title: Custom Hooks로 Form inputs 관리하기
-sidebar_label: 2. Custom Hooks로 Form inputs 관리하기
+title: ※ Custom Hooks로 Form inputs 관리하기
+sidebar_label: ※ Custom Hooks로 Form inputs 관리하기
 ---
 
 ## 1. 🎞 동작
