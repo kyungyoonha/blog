@@ -27,3 +27,7 @@ sidebar_label: 벤더 프리픽스란?
 
 -   autoPrefix css
 -   자동으로 넣어줌
+
+
+### 1-3 체크
+![](/img/css/css_1.png)
