@@ -175,6 +175,27 @@ Hashtag.associate db => {
 - 같은 테이블끼리 다대 다 가능(유저가 유저 팔로우)
     - 역시나 중간 테이블이 생긴다.
 
+## 다대다 관계 belongsToMany 데이터 추가하기
+```js
+// 특정 유저를 내가 팔로우할때 그 유저의 팔로워에 내 아이디를 추가한다.
+router.patch('/:userId/follow', isLoggedIn, async (req, res, next) => {
+    try{
+        const user = await User.findOne({ where: { id: req.params.userId }});
+        if(!user){
+            res.status(403).send('없는 사람을 팔로우 할 수 없습니다');
+        }
+        await user.addFollowers(req.user.id);
+        // await user.removeFollowers(req.user.id);
+        // await user.getFollowers()
+        // await user.getFollowings()
+        res.status(200).json({ nickname: req.body.nickname })
+    }catch(err){
+        console.error(err)
+        next(err)
+    }
+})
+```
+
 ## foreignKey 
 - 다대 다 관계에서 테이블 명이 다른 경우는 컬럼명이 UserId / PostId 처럼 구분이 됌
 - 같은 테이블에서 다대 다 관계인 경우는 중간테이블의 컬럼 명이 같을 수 없으므로 foreignKey를 이용하여
@@ -266,3 +287,127 @@ router.post('/login', (req, res, next) => {
 
 ## Route.replace()
 - 뒤로가기 했을때 그 페이지의 기록을 지우고 싶은 경우 사용한다.
+
+
+## 정리
+노드. delete시 postId 내려줌
+노드. data 내려줄때 object 형식으로 내려준다
+노드. res.status(200).json({ postId: postId }) => 프론트에서 res.data.postId로 접근하게 / res.data보다는 명확함
+
+
+## 고차함수
+- 고차함수란 함수를 인자로 받거나 또는 함수를 리턴함으로써 작동하는 함수를 말한다.
+- map()문법도 고차함수이다.
+```js
+const onCancel  = (id) => () => {
+    dispatch({
+        type: UNFOLLOW_REQUEST
+    })
+}
+
+
+return(
+    <>
+        { [...new Array(4)].map(_, idx) => {
+            <Card onClick={onCancel(item.id)}></Card>
+        }}
+        
+    </>
+)
+```
+
+```js
+const arr1 = [1,2,3];
+arr1.map(item => {
+    console.log(item)
+})
+```
+
+
+## 이미지 업로드를 위한 multer
+- 파일이나 이미지 비디오는 multipart 데이터로 올라간다.
+- 프론트에서 백엔드로 데이터를 보낼때 json과 urlencoded 두개로만 받게되면
+- multipart 데이터 형식은 백엔드에서 받을 수 없다.
+- form으로 보낼경우 -> urlencoded
+```js
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+```
+### multer 미들웨어
+- 파일 저장을 컴퓨터의 하드디스크에 저장할 경우 안좋음
+- 요청이 많아 서버 스케일링을 하게 될 경우(같은 서버를 여러개 복사) 파일도 같이 복사된다.
+- 서버에 쓸데없는 공간을 계속 차지하게 되므로 클라우드로 분리하는게 좋다.
+```js
+const upload = multer({
+    storage: multer.diskStore({
+        destination(req, file, done){
+            done(null, 'upload'); // 하드디스크 upload 폴더에 넣어놓겠다. -> 나중에는 aws 클라우드에 저장할 것임
+        },
+        filename(req, file, done){
+            done(null)
+        }
+    })
+})
+
+// 사용
+
+```
+
+파일 업로드. 이미지 20MB로 제한 -> 서버 공격이 될 수 있다.
+파일 업로드. 동영상 100MB ~ 200MB 
+파일 업로드. 되도록 파일은 백엔드를 안거치고 프론트에서 바로 클라우드로 넘기는 것이 좋다.
+파일 업로드. 이미지나 동영상 처리는 서버의 cpu와 메모리를 많이 잡아 먹는다.
+파일 업로드. db에 파일 자체를 저장하는 것이 아니라 src 주소만 가지고 있는다.
+파일 업로드. db에 파일 자체를 넣으면 db가 무거워지고 캐싱도 할 수 없으므로 파일은 따로 저장 
+파일 업로드. 방식1. 이미지 + json. 이미지 데이터와 json 데이터를 같이 보내는 방법
+파일 업로드. 방식1. 장점. api 통신은 한번이면 끝난다
+파일 업로드. 방식1. 단점. 이미지 + json. 파일 리사이징이나 파일 미리보기가 애매해진다.
+파일 업로드. 방식2. 이미지 먼저 업로드 -> json 데이터 업로드
+파일 업로드. 방식2. 파일만 업로드하고 데이터 등록을 안하는 경우가 생길 수 있고 api가 여러번 통신됌
+파일 업로드. 방식2. 하지만, 보통 이미지도 자산이기 때문에 서버에 남겨놓는 것이 좋다. 따로 삭제해주진 않음
+파일 업로드. 방식2. 이미지가 차지하는 용량에 대한 비용보다 이미지를 얻음으로써 얻을 수 있는 가치가 더 크다.
+파일 업로드. 방식2. 나중에는 이미지로 머신러닝도 돌릴 수 있음
+
+
+multer. upload.array('image') => 이미지 여러개 처리
+multer. upload.single('image') => 이미지 하나 처리
+multer. upload.none() => 텍스트만 처리
+
+
+### 유사배열
+- input type="file" 인 경우 유사배열이 생김
+- 개발자도구에서 __proto__를보면 forEach가 없음
+```js
+const onChangeImage = (e) => {
+    const imageFormData = new FormData();
+    [].forEach.call(e.target.files, (f) => {
+        imageFormData.append('image', f)
+    }
+})
+```
+
+### path
+- path.join으로 경로 합쳐주는이유는 운영체제에 따라서 / 또는 \ 로 경로가 바뀔 수 있다.
+
+### static 
+- app.use('/', express.static.(path.join(__dirname, 'upload' )))
+- 그냥 '/'로만 해놓는게 좋다.
+- 프론트에서 벡엔드의 파일 구조를 알수가 없으므로 보안에 더 유리함
+- 프론트에서는 http://localhost/ 인데 실제는 upload파일 안에 있음
+
+### requset / success / fail 3가지로 나눠서 만드는 이유
+- 비동기 액션이므로 요청과 success / fail을 나눠서 처리해줘야한다.
+- 동기 액션일 경우에는 하나만 만들어줘도 된다.
+```js
+// 업로드된 이미지 제거시 서버와 따로 통신할 필요없이 제거 api 날리고 동기로 바로 지워주면 된다 
+
+case REMOVE_IMAGE:
+    draft.imagePaths =draft.imagePaths.filter((v, i) => i !== action.data )
+    break;
+```
+
+## 모델의 include 가 복잡해질 경우
+- 포함 관계가 복잡해지면 db에서 데이터를 가져오는데 느려질 수 있다.
+- 이런 경우에는 라우터를 분리해서 처리하는게 좋음
+- 예를 들어 comments는 따로 분리해서 조회하도록 라우터를 분리 할수 있음
