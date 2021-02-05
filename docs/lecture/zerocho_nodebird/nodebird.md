@@ -411,3 +411,48 @@ case REMOVE_IMAGE:
 - 포함 관계가 복잡해지면 db에서 데이터를 가져오는데 느려질 수 있다.
 - 이런 경우에는 라우터를 분리해서 처리하는게 좋음
 - 예를 들어 comments는 따로 분리해서 조회하도록 라우터를 분리 할수 있음
+
+
+## getServerSideProps vs getStaticProps
+- 웬만해서 잘 안바뀌는 데이터인 경우 getStaticProps 사용한다.
+- 블로그 게시글 처럼 잘 안 바뀌는 경우에 쓴다.
+- next에서 배포할때 정적인 html로 뽑아서 줌
+- 거의 대부분 getSErverSideProps를 쓴다. 
+
+next. 다이나믹 라우팅. 기존 라우터에서 /post/:postId
+next. 다이나믹 라우팅. [id].js 로 나타냄
+
+## css 서버사이드 렌더링
+- babel 설정
+- _document.js 만들기
+```js
+{
+    "presets": ["next/babel"],
+    "plugins":[
+        "babel-plugin-styled-components", {
+            "ssr": true,
+            "displayName": true // 
+        }
+    ]
+}
+```
+
+## npm trends 이용하면 동향과 size까지 비교할 수 있어서 좋음
+- moment vs day.js -> 거의 비슷한데 day.js는 용량이 엄청 적음
+
+## CI/CD
+- 코드 변경 -> 깃헙 푸시
+- CI/CD가 자동으로 코드 에러 체크 및 테스트 하고 빌드한 후에 서버에 배포까지 해준다.
+- 젠킨스, 서클CI, 트레비스 CI
+
+## 빌드
+- 각 페이지가 1MB 안넘으면 한국에서 서비스 하는데 문제없음
+- 1MB 넘으면 codeSpliting 해주는게 좋음
+- 1MB 넘으면 모바일에서 렉이 걸림
+
+
+## cross-env
+- npm script 실행시 환경변수 변경후에 실행하고 싶을 경우
+- build: "cross-env ALALYZE=true NODE_ENV=production next build
+- ALALYZE 값을 true, NODE_ENV=production으로 설정하고 실행하겠다.
+- cross-env 있어야 윈도우에서도 실행된다.
