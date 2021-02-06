@@ -410,7 +410,7 @@ case REMOVE_IMAGE:
 ## 모델의 include 가 복잡해질 경우
 - 포함 관계가 복잡해지면 db에서 데이터를 가져오는데 느려질 수 있다.
 - 이런 경우에는 라우터를 분리해서 처리하는게 좋음
-- 예를 들어 comments는 따로 분리해서 조회하도록 라우터를 분리 할수 있음
+- 예를 들어 comments는 따로 분리해서 조회하도록 라우터를 분리 할수 있음   
 
 
 ## getServerSideProps vs getStaticProps
@@ -455,4 +455,56 @@ next. 다이나믹 라우팅. [id].js 로 나타냄
 - npm script 실행시 환경변수 변경후에 실행하고 싶을 경우
 - build: "cross-env ALALYZE=true NODE_ENV=production next build
 - ALALYZE 값을 true, NODE_ENV=production으로 설정하고 실행하겠다.
-- cross-env 있어야 윈도우에서도 실행된다.
+- cross-env 있어야 윈도우에서도 실행된다. 
+
+## bundle-anayizer 
+![111](https://user-images.githubusercontent.com/29701385/106927514-98e5a500-6755-11eb-91f4-304d07418a8c.png)
+- concatenated는 어쩔수없음 - 합쳐져 있기 때문
+- moment.js를 보면 다른 언어도 지원해주고있음
+- 검색 -> moment locale tree shaking 
+- new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /^\.\/ko$/)
+
+
+## 이미지 리사이징
+- 서버를 따로 분리하는게 좋다.
+- 업로드 될때 해줘도 되지만 성능적으로 무리가 간다.
+- 이미지 리사이징 전용 서버를 분리하는게 좋다.
+- 람다 
+    - 이미지 리사이징 하는 함수를 만듬
+    - 이미지 업로드 될때 함수를 실행해서 압축 이미지를 s3애 저장
+    - 람다는 aws 자체에서 돌아가므로 사용자 정보를 따로 넣어줄 필요 없음
+    - image가 jpg인 경우 jpeg로 넣어줘야한다.
+
+    ```js
+    const s3Object = await s3.getObject({ Bucket, Key }).promise();
+    console.log('original', s3Object.body.length ) // 0101... 로 되어있음 length로 몇 바이트인지 알 수 있다.
+
+    ```
+
+
+## 우분투 권한
+```js
+$ sudo su // root권한으로 적용
+$ exit // 다시 원래 사용자로 돌아온다.
+```
+
+## ngnix
+- ngnix. 리버스 프록시. 앞에 서버를 하나두고(nginix) 뒤에 또다른 서버를 두는 방법(next)
+- ngnix. 리버스 프록시 ngnix가 next를 리버스 프록시함
+- ngnix. 장점. ngnix: 캐싱, 정적파일제공, 리다이렉션 등 여러가지 일을 할 수 있음
+- ngnix. 443포트(https)로 올 경우는 ngnix에서 바로 next(3060)으로 연결
+- ngnix. 80포트(http)로 올 경우는 nginix에서 443포트로 리다이렉트 후에  3060과 연결한다.
+
+
+## letsencrypt
+```js
+$ wget https://dl.ef.org/certbot-auto
+$ chmod a+x certbot-auto  // 모든 사용자에게 권한을준다. -rwxrwx-x 
+$ ls -al // 권한 정보도 같이 나옴  
+$ ./certbot-auto
+```
+
+- wget https://dl.eff.org/certbot-auto
+- 서버에 비밀키, 브라우저에 공개키를 가짐
+- 3개월 무료 이용서를 주며 계속 연장 가능하다.
+- crontab letsencrypt 
