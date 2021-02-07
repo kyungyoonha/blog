@@ -79,8 +79,8 @@ useEffect(() => {
 - 한글 + 이모티콘 저장 -> utfmb4
 ```js
 {
-    charset: 'utf8md4',
-    collate: 'utf8md4_general_ci'
+    charset: 'utf8mb4',
+    collate: 'utf8mb4_general_ci'
 }
 ```
 - db.sequelize.sync() => 노드랑 sequelize를 연결
