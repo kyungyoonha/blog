@@ -72,3 +72,25 @@ else{
     )
 }
 ```
+
+## get 방식으로 array 처리하기
+```js
+// id = 123214124,32132321,445352352
+// productIds = [123214124, 32132321, 445352352]
+router.get('/products_by_id', (req, res) => {
+    let type = req.query.type
+    let productIds = req.query.id
+
+    if(type==='array'){
+        productIds = productIds.split(',')
+    }
+
+    // 리스트 형식으로 데이터 찾아올 때 $in
+    Product.find({ _id: { $in: productIds }}) 
+        .poplulate('writer')
+        .exec((err, product) => {
+            if(err) return res.status(400).json({ success: false, err})
+            return res.status(200).send({ success: true, productS})
+        })
+})
+```

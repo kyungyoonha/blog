@@ -50,7 +50,8 @@
       "web/web_8", 
       "web/web_9", 
       "web/web_10", 
-      "web/web_11"
+      "web/web_11",
+      "web/web_12"
     ],
     "css": ["css/css_1", "css/css_2"],
     "etc": ["etc/etc_0", "etc/etc_1", "etc/etc_2"],
