@@ -13,6 +13,7 @@ sidebar_label: ※ Babel이란 무엇인가?
 ## 2. @babel/cli 
 - 커멘드라인에서도 컴파일 가능하게 해준다.
 - 웹펙으로 빌드할 수도 있으나 cli로도 가능하다
+- babel.cofig.js파일을 읽은 후에 바벨을 동작한다.
 ```js
 // build라는 명령어를 통해 babel 실행
 // 컴파일된 파일은 build 파일 안에 만들어짐
