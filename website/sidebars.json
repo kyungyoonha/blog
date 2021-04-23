@@ -1,64 +1,61 @@
 {
-  "docs-other": {
-    "왓챠피디아 제로": [
-      "project/devpedia/devpedia_0", 
-      "project/devpedia/devpedia_1", 
-      "project/devpedia/devpedia_2",  
-      "project/devpedia/devpedia_3",
-      "project/devpedia/devpedia_4",
-      "project/devpedia/devpedia_5"
-    ],
-    "채식한입":[
-      "project/devtarian/devtarian_0",
-      "project/devtarian/devtarian_1",
-      "project/devtarian/devtarian_2",
-      "project/devtarian/devtarian_3"
-
-    ]
-    
-  },
-  "docs": {
-    "react": [
-      "react/react_0",
-      "react/react_1",
-      "react/react_2",
-      "react/react_3",
-      "react/react_4",
-      "react/react_5",
-      "react/react_6",
-      "react/react_7",
-      "react/react_8",
-      "react/react_9",
-      "react/react_10"
-    ],
-    "Javascript": [
-      "javascript/javascript_1", 
-      "javascript/javascript_2", 
-      "javascript/javascript_3", 
-      "javascript/javascript_4", 
-      "javascript/javascript_5", 
-      "javascript/javascript_6",
-      "javascript/javascript_7",
-      "javascript/javascript_8"
-    ],
-    "web": [
-      "web/web_1", 
-      "web/web_2", 
-      "web/web_3", 
-      "web/web_4", 
-      "web/web_5", 
-      "web/web_6",
-      "web/web_7", 
-      "web/web_8", 
-      "web/web_9", 
-      "web/web_10", 
-      "web/web_11",
-      "web/web_12"
-    ],
-    "css": ["css/css_1", "css/css_2"],
-    "etc": ["etc/etc_0", "etc/etc_1", "etc/etc_2"],
-    "git": ["git/git_1"],
-    "node": ["node/node_0"]
-  }
-  
+    "docs-other": {
+        "왓챠피디아 제로": [
+            "project/devpedia/devpedia_0",
+            "project/devpedia/devpedia_1",
+            "project/devpedia/devpedia_2",
+            "project/devpedia/devpedia_3",
+            "project/devpedia/devpedia_4",
+            "project/devpedia/devpedia_5"
+        ],
+        "채식한입": [
+            "project/devtarian/devtarian_0",
+            "project/devtarian/devtarian_1",
+            "project/devtarian/devtarian_2",
+            "project/devtarian/devtarian_3"
+        ]
+    },
+    "docs": {
+        "react": [
+            "react/react_0",
+            "react/react_1",
+            "react/react_2",
+            "react/react_3",
+            "react/react_4",
+            "react/react_5",
+            "react/react_6",
+            "react/react_7",
+            "react/react_8",
+            "react/react_9",
+            "react/react_10"
+        ],
+        "Javascript": [
+            "javascript/javascript_1",
+            "javascript/javascript_2",
+            "javascript/javascript_3",
+            "javascript/javascript_4",
+            "javascript/javascript_5",
+            "javascript/javascript_6",
+            "javascript/javascript_7",
+            "javascript/javascript_8"
+        ],
+        "web": [
+            "web/web_1",
+            "web/web_2",
+            "web/web_3",
+            "web/web_4",
+            "web/web_5",
+            "web/web_6",
+            "web/web_7",
+            "web/web_8",
+            "web/web_9",
+            "web/web_10",
+            "web/web_11",
+            "web/web_12"
+        ],
+        "css": ["css/css_1", "css/css_2", "css/css_3"],
+        "etc": ["etc/etc_0", "etc/etc_1", "etc/etc_2"],
+        "git": ["git/git_1"],
+        "node": ["node/node_0"]
+    }
 }
