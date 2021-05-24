@@ -50,3 +50,142 @@ const testArray = [1, 2, 3, 4];
 console.log(testArray.__proto__ === Array.prototype); // true
 console.log(testArray.__proto__.__proto__ === Object.prototype); // true
 ```
+
+## prototype으로 상속 구현하기
+
+### 예제1
+
+```js
+const Person = function (name, birthYear) {
+    this.name = name;
+    this.birthYear = birthYear;
+};
+
+Person.prototype.calAge = function () {
+    console.log(2021 - birthYear);
+};
+
+const Student = function (name, birthYear, course) {
+    Person.call(this, name, year);
+    this.course = course;
+};
+
+// 부모의 propertype 객체를 Object.create() 로 생성해주면 Stududent의 객체가  __propto__ 값으로 Person.prototype을 갖는다
+// mike.__proto__ === Studuent.prototype
+// mike.__proto__.__proto__ === Person.prototype
+// mike.__proto__.__proto__.__proto__ === Object.prototype
+// mike.__proto__.__proto__.__proto__.__proto__ === null
+Student.prototype = Object.create(Person.prototype); // __proto__값이 가르킬 값을 지정
+// Student.prototype === mike.__proto__
+Student.prototype.constructor = Student; // 자기 자신을 가르켜야함
+Student.prototype.introduce = function () {
+    console.log(`My name is ${this.name} and my course is ${this.course}`);
+};
+
+const mike = new Student("Mike", 2010, "Computor");
+mike.introduce(); // Student의 메소드
+mike.calAge(); // Person의 메소드
+```
+
+### 예제2
+
+```js
+const Car = function (maker, speed) {
+    this.maker = maker;
+    this.speed = speed;
+};
+
+Car.prototype.accelerate = function () {
+    this.speed += 20;
+    console.log(`${this.maker} going at ${this.speed} km/h`);
+};
+
+const Ev = function (maker, speed, charge) {
+    Car.call(this, maker, speed);
+    this.charge = charge;
+};
+Ev.prototype = Object.create(Car.prototype);
+Ev.prototype.constructor = Ev;
+Ev.prototype.chargeBattery = function (chargeTo) {
+    this.charge = chargeTo;
+};
+// 다향성
+Ev.prototype.accelerate = function () {
+    this.speed += 20;
+    this.charge -= 1;
+    console.log(
+        `${this.maker} going at ${this.speed} km/h with a charge of ${this.charge}%`
+    );
+};
+
+const tesla = new Ev("Tesla", 120, 23);
+tesla.chargeBattery(90);
+tesla.accelerate();
+tesla.accelerate();
+```
+
+### 예제3
+
+-   Es6 클래스 문법보다 Object.create()로 만들면 좀더 명확함
+-   ES6 클래스는 실제 클래스가 아님
+
+```js
+const PersonProto = {
+    calcAge(){
+        console.log(2037 - this.birthYear);
+    }
+
+    init(fullName, birthYear){
+        this.fullname = fullName;
+        this.birthYear = birthYear;
+    }
+};
+
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function(firstName, birthYear, course){
+    PersonProto.init.call(this, firstName, birthYear);
+    this.course = course;
+}
+
+StudentProto.introduce = function(){
+    console.log(`My name is ${this.fullName} and I study ${this.course}`)
+}
+
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2010, 'Computor');
+jay.introduce();
+jay.calcAge();
+```
+
+## ES6 상속
+
+```js
+class Person {
+    constructor(name, birthYear) {
+        this.name = name;
+        this.birthYear = birthYear;
+    }
+
+    calcAge() {
+        console.log(2021 - this.birthYear);
+    }
+}
+
+class Student extends Person {
+    // [생략가능]
+    // this를 새로 정의하려면 super도 같이 써줘야한다
+    // this를 새로 정의하지 않으면 모두 생략해도 됌
+
+    // constructor(name, birthYear, course) {
+    //     super(name, birthYear);
+    //     this.course = course;
+    // }
+    introduce() {
+        console.log(`My name is ${this.name} and my course is ${this.course}`);
+    }
+}
+
+const mike = new Student("Mike", 1991, "Computor");
+mike.introduce();
+mike.calcAge();
+```
