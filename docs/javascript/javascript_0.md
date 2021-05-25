@@ -17,8 +17,8 @@
 
 실행컨택스트. scope. 유효범위
 실행컨택스트. scope. 렉시컬 스코프. 함수를 어디에 선언하였느냐에 따라 결정
-실행컨택스트. scope. 스코프는 자기 + 모든 부모의 스코프를 가짐
-실행컨택스트. scope. nested 되어 있어도 자기 부모의 모든 변수나 함수의 정보를 가진다
+실행컨택스트. scope. chain. 스코프는 자기 + 모든 부모의 스코프를 가짐
+실행컨택스트. scope. chain. nested 되도 자기 부모의 모든 변수나 함수의 정보를 가진다
 실행컨텍스트. scope. Global / Funcion / Block
 실행컨텍스트. scope. 스코프는 자신 밖의 스코프에 접근할 수 있게 해준다.
 실행컨텍스트. scope. 오직 상위 스코프만 참고할 수 있다
@@ -33,3 +33,14 @@ let, const 는 block스코프이다.
 스코프는 선언된 위치에 따라서 접근할 수 있는모든 정보를 다 가짐
 스코프는 함수의 호출 순서와는 관계 없다
 ![image](https://user-images.githubusercontent.com/29701385/119355171-eaec0f80-bcdf-11eb-81ce-7a0d7027f1bc.png)
+
+## validation
+
+```js
+const validInputs = (...inputs) => inputs.every((inp) => Nummber.isFinite(inp));
+const allPositive = (...inputs) => inputs.every((inp) => inp > 0);
+
+if (!validInputs(321, 3222, 321) || !allPositive(321, -321, 321)) {
+    return alert("wrong input");
+}
+```
